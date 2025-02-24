@@ -185,9 +185,10 @@ if page == "Main Page":
     else:
         final_display = stocklist
 
-    st.dataframe(final_display, use_container_width=True, height=350, index=False)
+    final_display = final_display.reset_index(drop=True)
+    st.dataframe(final_display, use_container_width=True, height=350) 
 
-# Tombol untuk mengambil produk
+    # Tombol untuk mengambil produk
     col1, col2 = st.columns(2, gap="medium")
     
     with col1:
@@ -475,7 +476,8 @@ if page == "Register New Product":
     else:
         final_display = stocklist
 
-    st.dataframe(final_display, use_container_width=True, height=350, index=False)
+     final_display = final_display.reset_index(drop=True)
+    st.dataframe(final_display, use_container_width=True, height=350
     
     if st.button("Add New Product"):
         @st.dialog('Add New Product')
@@ -560,7 +562,8 @@ if page == "Register New Product":
 elif page == "Transaction History":
     st.title("Transaction History")
     sorted_transaction = st.session_state.transaction.sort_values(by='date', ascending=False)
-    st.dataframe(sorted_transaction, use_container_width=True, index=False)  
+    sorted_transaction = sorted_transaction.reset_index(drop=True) 
+    st.dataframe(sorted_transaction, use_container_width=True)
 
 elif page == "Monthly Report":
     current_year = datetime.now().year
@@ -675,7 +678,8 @@ elif page == "Monthly Report":
         report_data = calculate_monthly_report(sorted_transaction, selected_year, selected_month, stocklist)
         
         st.subheader(f"Monthly Report for {selected_month}-{selected_year}")
-        st.dataframe(report_data, use_container_width=True, index=False)
+        report_data = reprot_data.reset_index(drop=True) 
+        st.dataframe(report_data, use_container_width=True)
         
         # Download CSV Monthly Report
         csv = report_data.to_csv(index=False)
