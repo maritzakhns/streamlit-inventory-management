@@ -35,15 +35,6 @@
     border-color: #B2EBF2;
 }
 
-div[data-testid="stDataFrame"] table thead tr th {
-    background-color: #126ad4; /* Warna latar belakang hijau */
-    color: white;              /* Warna teks putih */
-    font-weight: bold;         /* Menebalkan teks */
-    text-align: center;        /* Menengahkan teks */
-    padding: 12px;             /* Menambahkan padding pada judul */
-    border: 1px solid #ddd;   /* Menambahkan border ringan */
-}
-
 
 
 
