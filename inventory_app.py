@@ -477,7 +477,7 @@ if page == "Register New Product":
         final_display = stocklist
 
     final_display = final_display.reset_index(drop=True)
-    st.dataframe(final_display, use_container_width=True, height=350
+    st.dataframe(final_display, use_container_width=True, height=350)
     
     if st.button("Add New Product"):
         @st.dialog('Add New Product')
