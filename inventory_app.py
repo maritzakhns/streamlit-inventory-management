@@ -678,7 +678,7 @@ elif page == "Monthly Report":
         report_data = calculate_monthly_report(sorted_transaction, selected_year, selected_month, stocklist)
         
         st.subheader(f"Monthly Report for {selected_month}-{selected_year}")
-        report_data = reprot_data.reset_index(drop=True) 
+        report_data = report_data.set_index('month')
         st.dataframe(report_data, use_container_width=True)
         
         # Download CSV Monthly Report
