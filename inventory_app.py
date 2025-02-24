@@ -61,6 +61,7 @@ st.sidebar.title("Inventory Management")
 page = st.sidebar.selectbox("Pages", 
     ["Main Page", "Register New Product", "Transaction History", "Monthly Report"]
 )
+st.image("logo_omron.jpg", width=200)
 
 if page == "Main Page":
     # Dialog Konfirmasi Transaksi
@@ -184,7 +185,7 @@ if page == "Main Page":
     else:
         final_display = stocklist
 
-    st.dataframe(final_display, use_container_width=True, height=350)
+    st.dataframe(final_display, use_container_width=True, height=350, index=False)
 
 # Tombol untuk mengambil produk
     col1, col2 = st.columns(2, gap="medium")
@@ -474,7 +475,7 @@ if page == "Register New Product":
     else:
         final_display = stocklist
 
-    st.dataframe(final_display, use_container_width=True, height=350)
+    st.dataframe(final_display, use_container_width=True, height=350, index=False)
     
     if st.button("Add New Product"):
         @st.dialog('Add New Product')
@@ -559,7 +560,7 @@ if page == "Register New Product":
 elif page == "Transaction History":
     st.title("Transaction History")
     sorted_transaction = st.session_state.transaction.sort_values(by='date', ascending=False)
-    st.dataframe(sorted_transaction, use_container_width=True)  
+    st.dataframe(sorted_transaction, use_container_width=True, index=False)  
 
 elif page == "Monthly Report":
     current_year = datetime.now().year
@@ -674,7 +675,7 @@ elif page == "Monthly Report":
         report_data = calculate_monthly_report(sorted_transaction, selected_year, selected_month, stocklist)
         
         st.subheader(f"Monthly Report for {selected_month}-{selected_year}")
-        st.dataframe(report_data, use_container_width=True)
+        st.dataframe(report_data, use_container_width=True, index=False)
         
         # Download CSV Monthly Report
         csv = report_data.to_csv(index=False)
