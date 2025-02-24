@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 from datetime import datetime
+from PIL import Image
 
 # Inisialisasi DataFrames
 stocklist = pd.read_csv('tbl_stock.csv')
@@ -441,6 +442,28 @@ if page == "Register New Product":
         st.session_state.dialog_active = False
         st.rerun()
         
+    if not os.path.exists('item_images'):
+        os.makedirs('item_images')
+
+    def save_uploaded_image(uploaded_file, item_number):
+        try:
+            # Buka gambar menggunakan PIL
+            image = Image.open(uploaded_file)
+            
+            # Convert ke RGB jika dalam mode RGBA
+            if image.mode == 'RGBA':
+                image = image.convert('RGB')
+                
+            # Resize gambar jika terlalu besar (opsional)
+            max_size = (800, 800)  # Maximum dimensions
+            image.thumbnail(max_size, Image.LANCZOS)
+            
+            # Simpan gambar
+            save_path = os.path.join("item_images", f"{item_number}.jpg")
+            image.save(save_path, "JPEG", quality=85)
+            return True, "Image saved successfully"
+        except Exception as e:
+            return False, str(e)
 
     st.title('Register New Product')
     search = st.text_input("", value=None, placeholder="Search product here")
@@ -468,6 +491,9 @@ if page == "Register New Product":
                     new_item_name = st.text_input("New Item Name", value=None)
                     new_item_quantity = st.number_input("Initial Quantity", min_value=0, step=1, value=0, placeholder='0')
                     purpose = st.selectbox('Select Purpose:', ['-', 'Maintenance', 'Construction', 'Renovation'])
+                    uploaded_file = st.file_uploader("Upload Product Image", type=['png', 'jpg', 'jpeg'])
+                    if uploaded_file:
+                        st.image(uploaded_file, caption="Preview", width=200)
                     
                     button_col1, button_col2 = st.columns(2, gap="medium")
                     with button_col1:
@@ -477,6 +503,14 @@ if page == "Register New Product":
                     with button_col2:
                         if st.button("Confirm", key="confirm_dialog_new"):
                             if new_item_name:
+                                if uploaded_file:
+                                    success, message = save_uploaded_image(uploaded_file, new_item_number)
+                                    if success:
+                                        st.success("Image uploaded successfully!")
+                                    else:
+                                        st.error(f"Failed to save image: {message}")
+                                    return
+                                    
                                 # Dapatkan nomor urut terakhir
                                 last_item_no = stocklist['no'].max() if 'no' in stocklist.columns else 0
                                 new_item_num = int(last_item_no) + 1 if not pd.isna(last_item_no) else 1
