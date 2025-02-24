@@ -1,0 +1,50 @@
+/* Hover effect untuk button */
+.stButton > button[kind="secondary"]:hover {
+    background-color: #c2dcf7;
+    color: black;
+    transform: translateY(-1px);
+}
+
+/* Mengubah warna secondary button */
+.stButton > button[kind="secondary"] {
+    background-color: #055bb4;
+    border: none;
+    color: white;
+}
+
+[data-testid=stSidebar] {
+    background-color: #e5f1fb;
+}
+
+/* Mengubah style tabel */
+.stDataFrame {
+    border: 1px solid #cee6ff;
+    border-radius: 8px;
+}
+
+.stTextInput > div > div > input {
+    border-radius: 8px;
+    border: 1px solid #cee6ff;
+}
+.stTextInput > div > div > input:focus {
+    border-color: #cee6ff;
+    box-shadow: 0 0 0 0.2rem rgba(178, 235, 242, 0.25);
+}
+
+.stSelectbox > div > div:hover {
+    border-color: #B2EBF2;
+}
+
+div[data-testid="stDataFrame"] table thead tr th {
+    background-color: #126ad4; /* Warna latar belakang hijau */
+    color: white;              /* Warna teks putih */
+    font-weight: bold;         /* Menebalkan teks */
+    text-align: center;        /* Menengahkan teks */
+    padding: 12px;             /* Menambahkan padding pada judul */
+    border: 1px solid #ddd;   /* Menambahkan border ringan */
+}
+
+
+
+
+
