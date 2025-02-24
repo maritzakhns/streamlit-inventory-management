@@ -61,7 +61,7 @@ st.sidebar.title("Inventory Management")
 page = st.sidebar.selectbox("Pages", 
     ["Main Page", "Register New Product", "Transaction History", "Monthly Report"]
 )
-st.image("logo_omron.jpg", width=200)
+st.sidebar.image("logo_omron.jpg", width=200)
 
 if page == "Main Page":
     # Dialog Konfirmasi Transaksi
@@ -185,7 +185,8 @@ if page == "Main Page":
     else:
         final_display = stocklist
 
-    final_display = final_display.reset_index(drop=True)
+     
+    final_display = final_display.set_index('no')
     st.dataframe(final_display, use_container_width=True, height=350) 
 
     # Tombol untuk mengambil produk
@@ -476,7 +477,7 @@ if page == "Register New Product":
     else:
         final_display = stocklist
 
-    final_display = final_display.reset_index(drop=True)
+    final_display = final_display.set_index('no')
     st.dataframe(final_display, use_container_width=True, height=350)
     
     if st.button("Add New Product"):
@@ -562,7 +563,7 @@ if page == "Register New Product":
 elif page == "Transaction History":
     st.title("Transaction History")
     sorted_transaction = st.session_state.transaction.sort_values(by='date', ascending=False)
-    sorted_transaction = sorted_transaction.reset_index(drop=True) 
+    sorted_transaction = sorted_transaction.set_index('date') 
     st.dataframe(sorted_transaction, use_container_width=True)
 
 elif page == "Monthly Report":
