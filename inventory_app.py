@@ -57,11 +57,11 @@ if 'confirm' not in st.session_state:
     st.session_state.confirm = False
 
 # Sidebar navigasi
+st.sidebar.image("logo_omron_remove.jpg", width=150)
 st.sidebar.title("Inventory Management")
 page = st.sidebar.selectbox("Pages", 
     ["Main Page", "Register New Product", "Transaction History", "Monthly Report"]
 )
-st.sidebar.image("logo_omron.jpg", width=200)
 
 if page == "Main Page":
     # Dialog Konfirmasi Transaksi
